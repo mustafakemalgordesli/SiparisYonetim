@@ -11,5 +11,6 @@ namespace Domain.Common
         public static string CompanyNotApproved = "Firma onaylı değil";
         public static string CompanyNotOrder = "Firma şuan sipariş almıyor";
         public static string UrunNotFound = "Ürün bulunamadı";
+        public static string FirmaNotFound = "Firma bulunamadı";
     }
 }

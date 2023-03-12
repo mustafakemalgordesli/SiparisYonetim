@@ -1,5 +1,6 @@
 ﻿using Application.Dtos;
 using Application.Features.FirmaFeatures.Commands.CreateFirma;
+using Application.Features.SiparisFeatures.Commands.CreateSiparis;
 using Application.Features.UrunFeatures.Commands.CreateUrun;
 using AutoMapper;
 using Domain.Entities;
@@ -19,5 +20,7 @@ public class GeneralMapping : Profile
 		CreateMap<Firma, FirmaViewDto>();
 		CreateMap<Urun, UrunViewDto>();
 		CreateMap<CreateUrunCommand, Urun>();
+		CreateMap<CreateSiparisCommand, Siparis>();
+		CreateMap<Siparis, SiparisViewDto>();
 	}
 }
