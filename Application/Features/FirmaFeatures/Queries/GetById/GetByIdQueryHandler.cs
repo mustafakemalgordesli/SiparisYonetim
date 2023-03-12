@@ -1,6 +1,8 @@
 ﻿using Application.Dtos;
+using Application.Exceptions;
 using Application.Interfaces.Repository;
 using AutoMapper;
+using Domain.Common;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -22,6 +24,10 @@ namespace Application.Features.FirmaFeatures.Queries.GetById
         public async Task<FirmaViewDto> Handle(GetByIdQuery request, CancellationToken cancellationToken)
         {
             var entity = await firmaRepository.GetByIdAsync(request.Id);
+
+            if (entity == null)
+                throw new NotFoundException(Messages.UrunNotFound);
+
             var viewModel = mapper.Map<FirmaViewDto>(entity);
             return viewModel;
         }
