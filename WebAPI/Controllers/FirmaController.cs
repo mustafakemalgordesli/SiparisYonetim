@@ -1,4 +1,5 @@
 ﻿using Application.Features.FirmaFeatures.Commands.CreateFirma;
+using Application.Features.FirmaFeatures.Commands.UpdateFirma;
 using Application.Features.FirmaFeatures.Queries.GetAll;
 using Application.Features.FirmaFeatures.Queries.GetById;
 using MediatR;
@@ -41,6 +42,18 @@ namespace WebAPI.Controllers
 
             var query = new GetByIdQuery(id);
             var response = await mediator.Send(query);
+            return Ok(response);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromRoute]int id, [FromBody]UpdateFirmaCommand command)
+        {
+            if (id != command.Id)
+            {
+                return BadRequest(new { Success = false, Message = "Id does not match" });
+            }
+
+            var response = await mediator.Send(command);
             return Ok(response);
         }
     }
