@@ -23,7 +23,7 @@ public static class ExceptionMiddlewareExtension
                     {
                         NotFoundException => StatusCodes.Status404NotFound,
                         ValidateException => StatusCodes.Status400BadRequest,
-                        BadRequestException=> StatusCodes.Status400BadRequest,
+                        BusinessRuleValidationException=> StatusCodes.Status400BadRequest,
                         _ => StatusCodes.Status500InternalServerError
                     };
 
@@ -33,7 +33,7 @@ public static class ExceptionMiddlewareExtension
                     {
                         NotFoundException => contextFeature.Error.Message,
                         ValidateException => contextFeature.Error.Message,
-                        BadRequestException => contextFeature.Error.Message,
+                        BusinessRuleValidationException => contextFeature.Error.Message,
                         _ => "Internal Server Error"
                     };
 

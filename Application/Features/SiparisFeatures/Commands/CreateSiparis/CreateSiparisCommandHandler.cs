@@ -34,13 +34,13 @@ public class CreateSiparisCommandHandler : IRequestHandler<CreateSiparisCommand,
 
         // Firma onaylı değilse siparişe izin vermeyecek
         if (firma.OnayDurum != true) 
-            throw new BadRequestException(Messages.CompanyNotApproved);
+            throw new BusinessRuleValidationException(Messages.CompanyNotApproved);
 
         TimeSpan siparisSaat = new TimeSpan(request.SiparisTarih.Hour, request.SiparisTarih.Minute, 0);
 
         // Siparis izin verilen saatler dışında ise siparis oluşturulmayacak
         if (firma.SiparisBaslangıcSaat > siparisSaat || siparisSaat > firma.SiparisBitisSaat)
-            throw new BadRequestException(Messages.CompanyNotOrder);
+            throw new BusinessRuleValidationException(Messages.CompanyNotOrder);
 
         var entity = mapper.Map<Siparis>(request);
         await siparisRepository.AddAsync(entity);
